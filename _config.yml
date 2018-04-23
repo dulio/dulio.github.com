@@ -1,9 +1,9 @@
-title:             Clean Blog
-email:             your-email@example.com
-description:       A Blog Theme by Start Bootstrap
-author:            Start Bootstrap
+title:             Dulio技术角
+email:             shenhd@mosrv.com
+description:       记录技术日常
+author:            Dulio
 baseurl:           ""
-url:               "http://blackrockdigital.github.io"
+url:               "http://dulio.github.io"
 
 # Social Profiles
 twitter_username:  SBootstrap
@@ -12,7 +12,7 @@ facebook_username: StartBootstrap
 
 # Build settings
 markdown:          kramdown
-paginate:          5
+paginate:          10
 paginate_path:     "/posts/page:num/"
 plugins:
   - jekyll-feed
