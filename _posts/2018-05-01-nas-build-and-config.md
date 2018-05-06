@@ -241,23 +241,23 @@ dpkg -i openmediavault-omvextrasorg_latest_all4.deb
 
 ### 磁盘分区与共享目录
 
-<img src="/assets/images/20180506151130.png" style="max-width:40em" alt="注意安装分区" title="注意安装分区">
+<img src="/assets/images/20180506151130.png" style="max-width:40em" alt="物理磁盘" title="物理磁盘">
 
 确认物理磁盘，并且使用Wipe格式化分区（注意备份数据！！！）
 
-<img src="/assets/images/20180506151321.png" style="max-width:40em" alt="注意安装分区" title="注意安装分区">
+<img src="/assets/images/20180506151321.png" style="max-width:40em" alt="RAID分区" title="RAID分区">
 
 创建Linux RAID分区，这里因为只有两块盘，采用Mirror镜像（RAID 1）方式
 
-<img src="/assets/images/20180506151501.png" style="max-width:40em" alt="注意安装分区" title="注意安装分区">
+<img src="/assets/images/20180506151501.png" style="max-width:40em" alt="LVM分区" title="LVM分区">
 
 创建LVM分区，最终创建出需要的逻辑分区。
 
-<img src="/assets/images/20180506152510.png" style="max-width:40em" alt="注意安装分区" title="注意安装分区">
+<img src="/assets/images/20180506152510.png" style="max-width:40em" alt="挂载分区" title="挂载分区">
 
 挂载分区
 
-<img src="/assets/images/20180506152156.png" style="max-width:40em" alt="注意安装分区" title="注意安装分区">
+<img src="/assets/images/20180506152156.png" style="max-width:40em" alt="共享目录" title="共享目录">
 
 分别在分区上建立共享目录
 
@@ -271,7 +271,7 @@ dpkg -i openmediavault-omvextrasorg_latest_all4.deb
 
 - storage：不保护或者低保护级别。主要存放不重要的文档、媒体文件。
 
-注：因为OMV在服务上挂载共享目录时，会改写目录权限，所以要分别建立共享分区，防止目录权限冲突。
+注：因为OMV在服务上挂载共享目录时，会改写目录权限，所以要分别建立共享目录，防止目录权限冲突。
 
 ---
 
