@@ -2,11 +2,11 @@
 layout: post
 title:  "NAS自搭建与配置"
 subtitle: ""
-keyword: "nas,docker,j4105,htpc,ddr4"
+keyword: "nas,openmediavault,omv,omv4,docker,j4105,htpc"
 date:   2018-05-01
 categories: nas
 tags:	nas htpc
-background: '/img/posts/06.jpg'
+background: ""
 ---
 # 为什么写这篇博客
 
@@ -24,15 +24,7 @@ background: '/img/posts/06.jpg'
 
 - 虚拟机服务器：NAS的CPU大多支持虚拟化，能跑一些玩的系统
 
-### 和普通PC比优势在哪里？
-
-重要的事情说三遍：省电！省电！省电！
-
-实现上述的功能，却只需要20W ~ 30W的电量，一年放着也用不了多少电费（精打细算脸）。
-
-### 为什么不用白群晖？
-
-太贵。。。
+---
 
 # 硬件筹备
 
@@ -58,11 +50,11 @@ J4105优点：
 
 至于主板，截止目前（5月1日）还只听说过华擎出了相应产品（J4105-ITX，翻白眼），这款主板目前来看比较明显的缺点：
 
-- 仅支持8G内存（4x2），未测试
+- 官方文档说仅支持最高8G内存（4Gx2），未测试
 
 - 板载只有4个SATA口（通过PCI-E x1加扩展卡还能扩展出若干，但是受限于x1的带宽，肯定是存在瓶颈的）
 
-- 仅支持UEFI，对linux系统安装会有一些阻碍
+- 主板仅支持UEFI，对linux系统安装会有一些阻碍（实测，可以关闭UEFI Secure，没有遇到啥阻碍）
 
 ### 机箱
 
@@ -90,7 +82,15 @@ J4105优点：
 
 ### 组装
 
-<img src="/assets/images/20180502234353.jpg" style="max-width:40em" alt="主板" title="主板">
+<img src="/assets/images/20180502234353.jpg" style="max-width:40em" alt="主板上电测试" title="主板上电测试">
+
+主板上电测试（上图）
+
+<img src="/assets/images/20180506134248.jpg" style="max-width:40em" alt="装机测试内部" title="装机测试内部">
+
+装机测试内部（上图）
+
+---
 
 # 网络
 
@@ -104,25 +104,39 @@ J4105优点：
 
 - 无公网IP：如FTTB(光纤到楼)，特点是主路由器上的WAN IP是一个内网地址，因为NAT，外网无法直接访问
 
-## 有公网IP
+### 有公网IP（Good luck，man）
 
 这种情况一般出现在老小区，路由器PPPoE拨号时分配到一个随机的公网IP，这个IP能在任何地方访问。
 
-我们只需要把NAS机器上的服务端口映射到路由器上，那么服务就连接到了公网。
+我们只需要把NAS机器上的服务端口映射到路由器上，那么服务就连接到了公网。该方式提供的网络速度=网络上行速度（具体要见各地运营商的策略）。唯一需要解决的问题是如果寻找到这个动态的公网IP地址。
 
-该方式提供的网络速度=网络上行速度（具体要见各地运营商的策略）
+注：运营商基本都会禁止访问80/443端口
 
-唯一需要解决的问题是如果寻找到这个动态的公网IP地址。可选的方案绑定域名并且使用dnspod定期更新域名。
+方案：
 
-注：很多运营商禁止访问80/443端口
+绑定域名并且使用dnspod API定期刷新域名解析。[参考](https://github.com/migege/dnspod)
 
-## 无公网IP
+### 无公网IP（I am sorry for that）
 
 在新式小区一般才会采用这种方式（运营商成本较低）
 
-这时，一般都需要寻找一台公网服务器，通过端口映射的方式，把本地服务接入外网，常见方案有花生壳（收费服务）、私有服务器+ssh/frp端口映射。
+这时，一般都需要寻找一台公网服务器，通过端口映射的方式，把本地服务接入外网，常见方案有：
+
+- 花生壳（需要收费服务）
+
+- 私有公网服务器+ssh/frp端口反向映射。
 
 无论如何，都需要额外的成本，并且注意网络攻击与远程服务器的数据安全。
+
+方案：
+
+弄个国内云主机（挂域名更佳，不过要备案。。），家里使用梅林路由器，在路由器上搭建frp插件，充当内网与公网的桥梁，管理端口映射关系。
+
+当然也可以在NAS机器上直接跑frp，但是在路由器上使用，在多NAS时（未来剁手预定）更容易管理维护
+
+【架构图】
+
+---
 
 # 操作系统
 
@@ -136,9 +150,9 @@ J4105优点：
 
 - 远程下载，能支持普通、BT、电驴等下载
 
-- docker、vm必须支持
+- docker、虚拟机必须支持
 
-群晖是集成方案，除了虚拟机无法实现，其他基本都有了比较完善的方案。但是因为黑群晖没有官方服务与技术支持，遇到了一些问题（如突然无法打开docker终端）。白群晖远程访问功能也没有，总体来说优势不大，所以放弃群晖。
+群晖是集成方案，除了虚拟机无法实现，其他基本都有了比较完善的方案。但是因为黑群晖没有官方服务与技术支持，遇到了一些问题（如突然无法打开docker终端）。所以放弃群晖。
 
 OMV优点：
 
@@ -152,12 +166,194 @@ OMV缺点：
 
 总之，OMV更符合我的预期。所以后面NAS会基于OMV。至于群晖，里面有太多兼容性问题，后面就不再讨论了。
 
-## OMV3安装过程
+## OMV4安装过程
+
+OMV提供启动盘下载，[下载地址](https://www.openmediavault.org/download.html)
+。
+
+但是本人作为资深炫技与轻微技术洁癖人员，仗着熟悉Debian，打算使用debian 9 (Stretch)上升级omv的方式安装。
+
+另外为了安装系统，准备了一个普通的4g U盘作启动盘和一个MLC芯片的32G U盘当作系统盘（正所谓铁打的数据，流水的系统）
 
 ### 启动盘准备
 
-### 系统安装
+写入镜像：插上U盘，刻入Debian Stretch镜像
 
-安装U盘
+【图片】
 
-### 基本配置
+### Debian系统安装
+
+插上启动U盘与系统U盘，引导启动U盘，开始安装！
+
+<img src="/assets/images/20180506135911.jpg" style="max-width:40em" alt="开始安装" title="开始安装">
+
+开始安装
+
+<img src="/assets/images/20180506140111.jpg" style="max-width:40em" alt="注意安装分区" title="注意安装分区">
+
+安装时盘比较多，需要注意安装到正确的系统U盘上
+
+后面的安装过程不详述，仔细讲的话又可以写一篇文章 :)
+
+### OMV安装
+
+现在直接登录到安装好的Debian系统
+
+先加源：
+
+```
+cat <<EOF >> /etc/apt/sources.list.d/openmediavault.list
+deb http://packages.openmediavault.org/public arrakis main
+EOF
+```
+
+安装：
+```
+apt-get update
+apt-get --allow-unauthenticated install openmediavault-keyring
+apt-get update
+apt-get --yes --auto-remove --show-upgraded \
+	--allow-downgrades --allow-change-held-packages \
+	--no-install-recommends \
+	--option Dpkg::Options::="--force-confdef" \
+	--option DPkg::Options::="--force-confold" \
+	install postfix openmediavault
+```
+
+初始化系统：
+```
+omv-initsystem
+```
+
+也可以看教程：[Install OMV4 on Debian 9](https://forum.openmediavault.org/index.php/Thread/21234-Install-OMV4-on-Debian-9-Stretch/)
+
+安装完成后，就可以打开Web管理页面了
+
+<img src="/assets/images/20180506142033.png" style="max-width:40em" alt="注意安装分区" title="注意安装分区">
+
+登录页面，默认用户密码admin/openmediavault
+
+### OMV基本配置
+
+插件服务支持
+
+```
+wget http://omv-extras.org/openmediavault-omvextrasorg_latest_all4.deb
+dpkg -i openmediavault-omvextrasorg_latest_all4.deb
+```
+
+### 磁盘分区与共享目录
+
+<img src="/assets/images/20180506151130.png" style="max-width:40em" alt="注意安装分区" title="注意安装分区">
+
+确认物理磁盘，并且使用Wipe格式化分区（注意备份数据！！！）
+
+<img src="/assets/images/20180506151321.png" style="max-width:40em" alt="注意安装分区" title="注意安装分区">
+
+创建Linux RAID分区，这里因为只有两块盘，采用Mirror镜像（RAID 1）方式
+
+<img src="/assets/images/20180506151501.png" style="max-width:40em" alt="注意安装分区" title="注意安装分区">
+
+创建LVM分区，最终创建出需要的逻辑分区。
+
+<img src="/assets/images/20180506152510.png" style="max-width:40em" alt="注意安装分区" title="注意安装分区">
+
+挂载分区
+
+<img src="/assets/images/20180506152156.png" style="max-width:40em" alt="注意安装分区" title="注意安装分区">
+
+分别在分区上建立共享目录
+
+可参考的分区：
+
+- docker-lib：高保护级别。存储docker镜像、容器信息
+
+- docker-data：高保护级别。存储docker持久化信息
+
+- virtualbox：高保护级别。因为想玩一下虚拟机，专门划出来存放虚拟机镜像与文件
+
+- storage：不保护或者低保护级别。主要存放不重要的文档、媒体文件。
+
+注：因为OMV在服务上挂载共享目录时，会改写目录权限，所以要分别建立共享分区，防止目录权限冲突。
+
+---
+
+# 常用服务搭建
+
+### Docker
+
+<img src="/assets/images/20180506150211.png" style="max-width:40em" alt="开启Docker源" title="开启Docker源">
+
+开启Docker源
+
+Plugin菜单开启DOCKER-UI插件
+
+<img src="/assets/images/20180506150425.png" style="max-width:40em" alt="开启Docker源" title="开启Docker源">
+
+开启Docker组件
+
+<img src="/assets/images/20180506150837.png" style="max-width:40em" alt="开启Docker源" title="开启Docker源">
+
+开始使用Docker
+
+### VirtualBox
+
+<img src="/assets/images/20180506153101.png" style="max-width:40em" alt="开启Docker源" title="开启Docker源">
+
+很有意思，通过phpvirtualbox在Web管理，创建后可以通过Virtualbox的Remote Display打开远程桌面安装与使用。
+
+主要用于安装Windows系统，干一些linux上干不了的事情。
+
+实际使用体验（Win7，分配1核，2G内存）：略卡。。。好吧，看来J4105也只能勉强带起来
+
+### FTP
+
+<img src="/assets/images/20180506152820.png" style="max-width:40em" alt="开启Docker源" title="开启Docker源">
+
+挂载共享目录，就可以让用户通过FTP访问
+
+### 其他
+
+其他如NFS、SMB、下载等都是开箱即用，没有什么好说。
+
+并不是苹果粉，Time Machine什么的没研究方案。
+
+下载功能只有基本的，youtube-dl组件也只能挂代理用，实在不行，只能开虚拟Windows解决（无奈脸）
+
+---
+
+# 总结
+
+整体搭建下来的感觉是，无何止的折腾，必须要在安全与便捷、定制与易用之间选择。
+
+目前整体搭建起来后，还比较满意，后面会继续进行NAS应用与HTPC方面的探索。
+
+---
+
+# FAQ
+
+### NAS和普通PC比优势在哪里？
+
+重要的事情说三遍：省电！省电！省电！
+
+实现PC的功能，却只需要20W ~ 30W的电量，一年放着也用不了多少电费（精打细算脸）。
+
+### 为什么不用白群晖？
+
+太贵。。。
+
+### 磁盘分区方案怎么选择？
+
+目前流行的解决方案:
+
+- ZFS：基于成熟的Oracle技术，拥有最多的特性，集成RAID技术，应该是首选的方案。虽然因为协议问题没有在Debian的主库中，但是仍然可以使用。
+
+- LVM2 + Linux RAID：基于Linux维护的软件与库，使用最多的方式。
+
+- MergerFS + SnapRAID：构建于底层分区体系上的方案，没有实际使用。
+
+最初通过在OMV上安装ZFS插件，尝试使用ZFS，但是OMV对ZFS支持不佳，应该是设计缺陷，无法在ZFS分区上创建共享目录（Shared Folders），导致无法在GUI上方便使用，于是无奈弃用。。。
+
+关于MergerFS + SnapRAID方案，因为是较新的方案，还未调研功能性与稳定性，不做评论
+
+最后的选择是使用最常见的LVM2 + Linux软RAID
