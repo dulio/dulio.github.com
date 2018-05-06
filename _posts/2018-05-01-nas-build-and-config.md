@@ -289,7 +289,7 @@ Plugin菜单开启DOCKER-UI插件
 
 开启Docker组件
 
-<img src="/assets/images/20180506150837.png" style="max-width:40em" alt="开启Docker源" title="开启Docker源">
+<!-- <img src="/assets/images/20180506150837.png" style="max-width:40em" alt="开启Docker源" title="开启Docker源"> -->
 
 开始使用Docker
 
