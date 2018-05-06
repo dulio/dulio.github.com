@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "NAS自搭建与配置"
+title:  "自组NAS的折腾历程"
 subtitle: ""
 keyword: "nas,openmediavault,omv,omv4,docker,j4105,htpc"
 date:   2018-05-01
@@ -8,6 +8,7 @@ categories: nas
 tags:	nas htpc
 background: ""
 ---
+
 # 为什么写这篇博客
 
 炫技！初衷也没有想做一个大而全的攻略，只想分享个人历程，给其他同学提供一个借鉴思路。
@@ -134,8 +135,6 @@ J4105优点：
 
 当然也可以在NAS机器上直接跑frp，但是在路由器上使用，在多NAS时（未来剁手预定）更容易管理维护
 
-【架构图】
-
 ---
 
 # 操作系统
@@ -178,8 +177,6 @@ OMV提供启动盘下载，[下载地址](https://www.openmediavault.org/downloa
 ### 启动盘准备
 
 写入镜像：插上U盘，刻入Debian Stretch镜像
-
-【图片】
 
 ### Debian系统安装
 
@@ -324,7 +321,7 @@ Plugin菜单开启DOCKER-UI插件
 
 # 总结
 
-整体搭建下来的感觉是，无何止的折腾，必须要在安全与便捷、定制与易用之间选择。
+整体搭建下来的感觉是，无休止的折腾，必须要在安全与便捷、定制与易用之间做艰难选择。
 
 目前整体搭建起来后，还比较满意，后面会继续进行NAS应用与HTPC方面的探索。
 
@@ -356,4 +353,4 @@ Plugin菜单开启DOCKER-UI插件
 
 关于MergerFS + SnapRAID方案，因为是较新的方案，还未调研功能性与稳定性，不做评论
 
-最后的选择是使用最常见的LVM2 + Linux软RAID
+最后的选择是使用最常见的LVM2 + Linux软RAID。
