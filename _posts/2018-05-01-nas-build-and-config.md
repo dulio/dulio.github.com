@@ -83,11 +83,11 @@ J4105优点：
 
 ### 组装
 
-<img src="/assets/images/20180502234353.jpg" style="max-width:40em" alt="主板上电测试" title="主板上电测试">
+<img src="/assets/images/20180502234353.jpg" style="width:100%" alt="主板上电测试" title="主板上电测试">
 
 主板上电测试（上图）
 
-<img src="/assets/images/20180506134248.jpg" style="max-width:40em" alt="装机测试内部" title="装机测试内部">
+<img src="/assets/images/20180506134248.jpg" style="width:100%" alt="装机测试内部" title="装机测试内部">
 
 装机测试内部（上图）
 
@@ -182,11 +182,11 @@ OMV提供启动盘下载，[下载地址](https://www.openmediavault.org/downloa
 
 插上启动U盘与系统U盘，引导启动U盘，开始安装！
 
-<img src="/assets/images/20180506135911.jpg" style="max-width:40em" alt="开始安装" title="开始安装">
+<img src="/assets/images/20180506135911.jpg" style="width:100%" alt="开始安装" title="开始安装">
 
 开始安装
 
-<img src="/assets/images/20180506140111.jpg" style="max-width:40em" alt="注意安装分区" title="注意安装分区">
+<img src="/assets/images/20180506140111.jpg" style="width:100%" alt="注意安装分区" title="注意安装分区">
 
 安装时盘比较多，需要注意安装到正确的系统U盘上
 
@@ -226,7 +226,7 @@ omv-initsystem
 
 安装完成后，就可以打开Web管理页面了
 
-<img src="/assets/images/20180506142033.png" style="max-width:40em" alt="注意安装分区" title="注意安装分区">
+<img src="/assets/images/20180506142033.png" style="width:100%" alt="注意安装分区" title="注意安装分区">
 
 登录页面，默认用户密码admin/openmediavault
 
@@ -241,23 +241,23 @@ dpkg -i openmediavault-omvextrasorg_latest_all4.deb
 
 ### 磁盘分区与共享目录
 
-<img src="/assets/images/20180506151130.png" style="max-width:40em" alt="物理磁盘" title="物理磁盘">
+<img src="/assets/images/20180506151130.png" style="width:100%" alt="物理磁盘" title="物理磁盘">
 
 确认物理磁盘，并且使用Wipe格式化分区（注意备份数据！！！）
 
-<img src="/assets/images/20180506151321.png" style="max-width:40em" alt="RAID分区" title="RAID分区">
+<img src="/assets/images/20180506151321.png" style="width:100%" alt="RAID分区" title="RAID分区">
 
 创建Linux RAID分区，这里因为只有两块盘，采用Mirror镜像（RAID 1）方式
 
-<img src="/assets/images/20180506151501.png" style="max-width:40em" alt="LVM分区" title="LVM分区">
+<img src="/assets/images/20180506151501.png" style="width:100%" alt="LVM分区" title="LVM分区">
 
 创建LVM分区，最终创建出需要的逻辑分区。
 
-<img src="/assets/images/20180506152510.png" style="max-width:40em" alt="挂载分区" title="挂载分区">
+<img src="/assets/images/20180506152510.png" style="width:100%" alt="挂载分区" title="挂载分区">
 
 挂载分区
 
-<img src="/assets/images/20180506152156.png" style="max-width:40em" alt="共享目录" title="共享目录">
+<img src="/assets/images/20180506152156.png" style="width:100%" alt="共享目录" title="共享目录">
 
 分别在分区上建立共享目录
 
@@ -279,23 +279,23 @@ dpkg -i openmediavault-omvextrasorg_latest_all4.deb
 
 ### Docker
 
-<img src="/assets/images/20180506150211.png" style="max-width:40em" alt="开启Docker源" title="开启Docker源">
+<img src="/assets/images/20180506150211.png" style="width:100%" alt="开启Docker源" title="开启Docker源">
 
 开启Docker源
 
 Plugin菜单开启DOCKER-UI插件
 
-<img src="/assets/images/20180506150425.png" style="max-width:40em" alt="开启Docker源" title="开启Docker源">
+<img src="/assets/images/20180506150425.png" style="width:100%" alt="开启Docker源" title="开启Docker源">
 
 开启Docker组件
 
-<!-- <img src="/assets/images/20180506150837.png" style="max-width:40em" alt="开启Docker源" title="开启Docker源"> -->
+<!-- <img src="/assets/images/20180506150837.png" style="width:100%" alt="开启Docker源" title="开启Docker源"> -->
 
 开始使用Docker！
 
 ### VirtualBox
 
-<img src="/assets/images/20180506153101.png" style="max-width:40em" alt="开启Docker源" title="开启Docker源">
+<img src="/assets/images/20180506153101.png" style="width:100%" alt="开启Docker源" title="开启Docker源">
 
 很有意思，通过phpvirtualbox在Web管理，创建后可以通过Virtualbox的Remote Display打开远程桌面安装与使用。
 
@@ -305,7 +305,7 @@ Plugin菜单开启DOCKER-UI插件
 
 ### FTP
 
-<img src="/assets/images/20180506152820.png" style="max-width:40em" alt="开启Docker源" title="开启Docker源">
+<img src="/assets/images/20180506152820.png" style="width:100%" alt="开启Docker源" title="开启Docker源">
 
 挂载共享目录，就可以让用户通过FTP访问
 
