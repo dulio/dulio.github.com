@@ -1,10 +1,12 @@
 ---
 layout: post
 title:  "Jekyll使用与配置"
+subtitle: ""
 keyword: "jekyll,github,blog"
 date:   2015-01-12
-categories: ass
+categories: jekyll
 tags:	jekyll github blog
+background: ""
 ---
 
 # 前言
