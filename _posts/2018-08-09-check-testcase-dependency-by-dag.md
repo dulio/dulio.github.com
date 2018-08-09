@@ -20,7 +20,7 @@ background: ""
 
 在有向图中，无法从某个顶点出发经过若干条边回到该点，则这个图是一个有向无环图（DAG图），见下图。
 
-[<img src="//assets/images/1533815166312.png">](DAG)
+[<img src="/assets/images/1533815166312.png">](DAG)
 
 # 工具库与代码编写
 
