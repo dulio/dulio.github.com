@@ -23,7 +23,7 @@ Jekyll 是一个简单的博客形态的静态站点生产机器。它有一个�
 ~ $ gem install jekyll
 ~ $ jekyll new blog
 ~ $ cd blog
-~/blog $ jekyll serve
+~/blog $ bundle exec jekyll serve
 {% endhighlight %}
 
 
