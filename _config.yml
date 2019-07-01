@@ -12,8 +12,11 @@ facebook_username:
 
 # Build settings
 markdown:          kramdown
-paginate:          10
+paginate:          15
 paginate_path:     "/posts/page:num/"
 plugins:
   - jekyll-feed
   - jekyll-paginate
+
+# Server Config
+port: 9000
